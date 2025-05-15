@@ -1,4 +1,4 @@
-public class Grocery
+public class Grocery extends Product
 {
   private boolean isGeneticallyModified;
 
