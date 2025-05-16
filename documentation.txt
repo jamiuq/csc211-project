@@ -1,0 +1,135 @@
+User.java:
+
+Purpose: Represents a generic user with username and password. Base class for Customer and Admin.
+
+Methods:
+
+  User(String username, String password): Constructor. Initializes username and password.
+
+  getUsername(): Returns the username.
+
+  setUsername(String username): Sets the username.
+
+  getPassword(): Returns the password.
+
+  setPassword(String password): Sets the password.
+
+  toString(): Returns a string with username and password.
+
+Admin.java:
+
+Represents an administrator user. Extends User. Can add and remove products from orders.
+
+Methods:
+
+  Admin(int id, String username): Constructor. Initializes with an ID and username.
+
+  addProduct(Order someonesOrder, Product product): Adds a product to an order.
+
+  removeProduct(Order someonesOrder, Product product): Removes a product from an order.
+
+Customer.java:
+
+Purpose: Represents a customer user. Extends User. Has a personal shopping Order.
+
+Methods:
+
+  Customer(String username, String password): Constructor. Initializes with username, password, and a new Order.
+
+  getLocalOrder(): Returns the customer's current Order.
+
+  setLocalOrder(Order setorder): Sets a new Order for the customer.
+
+  toString(): Returns a string with user info and the customer's Order info.
+
+Product.java:
+
+Purpose: Represents a generic product with name and price. Base class for Electronic, Clothing, and Grocery.
+
+Methods:
+
+  Product(String itemName, double price): Constructor. Initializes name and price.
+
+  getItemName(): Returns the product name.
+
+  setItemName(String itemName): Sets the product name.
+
+  getPrice(): Returns the product price.
+
+  setPrice(double price): Sets the product price.
+
+  toString(): Returns a string with the product name and price.
+
+Electronic.java:
+
+Purpose: Represents an electronic product with a brand. Extends Product.
+
+Methods:
+
+  Electronic(String itemName, double price, String brand): Constructor. Initializes name, price, and brand.
+
+  getBrand(): Returns the brand.
+
+  setBrand(String brand): Sets the brand.
+
+  toString(): Returns a string with product info and the brand.
+
+Clothing.java:
+
+Purpose: Represents a clothing product with size and color. Extends Product.
+
+Methods:
+
+  Clothing(String itemName, double price, int size, String color): Constructor. Initializes name, price, size, and color.
+
+  getSize(): Returns the size.
+
+  setSize(int size): Sets the size.
+
+  getColor(): Returns the color.
+
+  setColor(String color): Sets the color.
+
+  toString(): Returns a string with product info, size, and color.
+
+Grocery.java:
+
+Purpose: Represents a grocery product with a genetically modified status. Extends Product.
+
+Methods:
+
+  Grocery(String itemName, double price, boolean isGeneticallyModified): Constructor. Initializes name, price, and GM status.
+
+  isGeneticallyModified(): Returns the GM status.
+
+  setGeneticallyModified(boolean geneticallyModified): Sets the GM status.
+
+  toString(): Returns a string with product info and the GM status.
+
+Order.java:
+
+Purpose: Represents a customer's shopping cart, managing a list of products and calculating order totals.
+
+Methods:
+
+  cart: Stores the list of Product objects in the cart.
+
+  getCart(): Returns the list of products in the cart.
+
+  addToCart(Product product): Adds a product to the shopping cart.
+
+  removeFromCart(Product product): Removes the first occurrence of a product from the cart.
+
+  removeFromCart(int index): Removes a product at a specific index from the cart.
+
+  calculateTotal(cartProcessor totalCalculator): Calculates a value based on cart items using a lambda.
+
+  applyDiscount(cartProcessor discountApplicator, double initialTotal): Applies a discount to a total using a lambda.
+
+  calculateTax(cartProcessor taxCalculator, double subtotal): Calculates tax on a subtotal using a lambda.
+
+  calculateShipping(cartProcessor shippingCalculator): Calculates shipping cost based on cart items using a lambda.
+
+  getTotalAmount(): Calculates the final total amount of the order, including discounts, tax, and shipping.
+
+  toString(): Returns a string indicating the number of items in the cart.
