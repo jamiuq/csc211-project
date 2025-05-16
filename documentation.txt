@@ -1,4 +1,5 @@
 https://github.com/jamiuq/csc211-project
+I used streams in Main.java if you want to see that
 
 User.java:
 
