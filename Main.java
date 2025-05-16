@@ -14,32 +14,19 @@ public class Main
     Customer customer1 = new Customer("john.doe", "password12");
     Admin admin1 = new Admin("jane.admin", "knicksrule104");
   
-    // Customer adds items to the cart
-    customer1.addToCart(products.get(0)); // Laptop
-    customer1.addToCart(products.get(2)); // T-Shirt
-    customer1.addToCart(products.get(4)); // Apples
+    Order customerOrder = customer1.getLocalOrder();
+    customerOrder.addToCart(products.get(0)); // Laptop
+    customerOrder.addToCart(products.get(2)); // T-Shirt
+    customerOrder.addToCart(products.get(4)); // Apples
     
     System.out.println(customer1);
-    Order customerOrder = customer1.getLocalOrder();
     
     // Admin adds and removes a product
     admin1.addProduct(customerOrder, new Electronics("Headphones", 150.00, "Sony"));
-    System.out.println("\Customer profile after admin added a new product:\n" + customer1);
-  
-    // Using lambdas for cart calculations
-    double subtotal = customer1.calculateCartTotal(cart -> cart.stream().mapToDouble(Product::getPrice).sum());
-    System.out.println("Cart Subtotal: $" + String.format("%.2f", subtotal));
-  
-    double discountedTotal = customer1.applyDiscount(subtotal, total -> total * 0.9); // 10% discount
-    System.out.println("Cart Total after 10% discount: $" + String.format("%.2f", discountedTotal));
-  
-    double tax = customer1.calculateTax(discountedTotal, amount -> amount * 0.08); // 8% tax
-    System.out.println("Cart Total after tax: $" + String.format("%.2f", discountedTotal + tax));
-  
-    double shippingFee = customer1.calculateShipping(cart -> cart.size() * 1.5); // $1.5 per item shipping
-    System.out.println("Shipping Fee: $" + String.format("%.2f", shippingFee));
-  
-    double finalTotal = discountedTotal + tax + shippingFee;
+    System.out.println("Customer profile after admin added a new product:\n" + customer1);
+
+    
+    double finalTotal = customerOrder.getTotalAmount(); // function that uses lambdas to calculate total
     System.out.println("Final Cart Total: $" + String.format("%.2f", finalTotal));
   
     // Using streams for search and sorting
@@ -58,11 +45,11 @@ public class Main
   
     // Assume we have a list of orders
     List<Order> orders = new ArrayList<>();
-    orders.add(order1);
+    orders.add(customerOrder);
   
     String searchItem = "laptop";
     List<Order> customerOrders = orders.stream()
-            .filter(order -> order.getCart().stream().filter(product -> product.getName().toLowerCase().containts(searchTerm.toLowerCase())))
+            .filter(order -> order.getCart().stream().filter(product -> product.getName().toLowerCase().contains(searchTerm.toLowerCase())))
             .collect(Collectors.toList());
     System.out.println("\nOrders that contain '" + searchCustomer + "':");
     customerOrders.forEach(System.out::println);
