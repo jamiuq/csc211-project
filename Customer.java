@@ -11,4 +11,9 @@ class Customer extends User
 
     public Order getLocalOrder() {return localOrder;}
     public void setLocalOrder(Order setorder) {localOrder = setorder;}
+  
+    public String toString() 
+    {
+      return super.toString() + ", " + localOrder.toString();
+    }
 }
