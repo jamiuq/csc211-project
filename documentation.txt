@@ -1,3 +1,5 @@
+https://github.com/jamiuq/csc211-project
+
 User.java:
 
 Purpose: Represents a generic user with username and password. Base class for Customer and Admin.
