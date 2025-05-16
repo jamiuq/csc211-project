@@ -1,6 +1,6 @@
 // Subclass for customers
 class Customer extends User {
-    private List<Product> cart;
+    private ArrayList<Product> cart;
 
     public Customer(String username, String password) {
       super(username, password);
