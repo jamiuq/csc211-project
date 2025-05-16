@@ -25,7 +25,7 @@ public class Order
   }
   
   // Lambda to calculate the total price of items in the cart
-  public double calculateCartTotal(numProcessor totalCalculator) 
+  public double calculateCartTotal(cartProcessor totalCalculator) 
   {
     return totalCalculator.apply(this.cart);
   }
@@ -43,9 +43,23 @@ public class Order
   }
 
   // Lambda to calculate shipping fees
-  public double calculateShipping(numProcessor shippingCalculator) 
+  public double calculateShipping(cartProcessor shippingCalculator) 
   {
     return shippingCalculator.apply(this.cart);
+  }
+
+  public double getTotalAmount()
+  {
+    double subtotal = this.calculateCartTotal(cart -> cart.stream().mapToDouble(Product::getPrice).sum());
+  
+    double discountedTotal = customer1.applyDiscount(subtotal, total -> total * 0.9); // 10% discount
+  
+    double tax = customer1.calculateTax(discountedTotal, amount -> amount * 0.08); // 8% tax
+  
+    double shippingFee = customer1.calculateShipping(cart -> cart.size() * 1.5); // $1.5 per item shipping
+  
+    double finalTotal = discountedTotal + tax + shippingFee;
+    return finalTotal;
   }
   
   public String toString() 
